@@ -62,7 +62,7 @@ var CommentBox = React.createClass({
 
     loadCommentsFromServer:function(){
         $.ajax({
-            url:this.props.url,
+            url:"get/"+this.props.url,
             dataType:'json',
             cache:false,
             success:function(data){
@@ -74,7 +74,9 @@ var CommentBox = React.createClass({
         });
     },
     handleCommentSubmit:function(comment){
-        console.log(comment)
+        var comments = this.state.data;
+        var newComments = comments.concat([comment]);
+        this.setState({data:newComments});
         $.ajax({
             url:"post/"+this.props.url,
             dataType:'json',

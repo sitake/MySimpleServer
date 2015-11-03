@@ -30,7 +30,7 @@ object Server extends App {
     case "/get/app/comments.json" => new Service[httpx.Request, httpx.Response] {
       def apply(req: httpx.Request): Future[httpx.Response] = {
         val response = httpx.Response()
-        val url = Paths.get("E:/work/Server/target/scala-2.11/classes/app/comments.json").toUri.toURL
+        val url = Paths.get("Documents/MyWork/MySimpleServer/target/scala-2.11/classes/app/comments.json").toUri.toURL
         response.contentString = scala.io.Source.fromURL(url).mkString
         Future.value(
           response
@@ -40,7 +40,7 @@ object Server extends App {
     case  "/post/app/comments.json" => new Service[httpx.Request, httpx.Response] {
       def apply(req: httpx.Request): Future[httpx.Response] = {
         val response = httpx.Response()
-        val url = Paths.get("E:/work/Server/target/scala-2.11/classes/app/comments.json").toUri.toURL
+        val url = Paths.get("Documents/MyWork/MySimpleServer/target/scala-2.11/classes/app/comments.json").toUri.toURL
         val comments = parse(url.openStream)
         val newComments = comments ++ ("author" -> req.getParam("author")) ~ ("text" -> req.getParam("text"))
         val json = compact(render(newComments))
